@@ -1,0 +1,57 @@
+
+.root {
+  position: relative;
+  left: -30px;
+
+    .icon {
+        &:hover {
+            opacity: 1;
+            transition: 0.1s ease-in-out;
+        }
+        
+
+    }
+  
+
+     
+}
+
+.input {
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 12px 24px;
+  padding-left: 35px;
+  width: 300px;
+  font-size: 16px;
+
+    &:focus{
+      border: 3px solid #fe1e1e;
+      box-shadow: 1px 1px  #2e1f1f;
+      transition: 0.09s ease-in-out;
+    }
+    
+}
+
+.icon {
+  height: 24px;
+  width: 22px;
+  opacity: 0.35;
+  position: absolute;
+  left: 8px;
+  top: 12px;
+}
+
+.close{
+  height: 24px;
+  width: 22px;
+  opacity: 0.35;
+  position: absolute;
+  right: 8px;
+  top: 14px;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    transition: 0.1s ease-in-out;
+  }
+
+}
