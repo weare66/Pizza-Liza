@@ -4,6 +4,7 @@ import { Sort } from '../components/Sort';
 import { PizzaBlock } from '../components/PizzaBlock';
 import { Skeleton } from '../components/PizzaBlock/Skeleton';
 import axios from 'axios';
+import { Pagination } from '../components/Pagination';
 
 
 export const Home = ({searchValue}) => {
@@ -20,6 +21,9 @@ export const Home = ({searchValue}) => {
   const [sortValue, setSortValue] = React.useState({
     name: 'популярности', sortProperty: 'rating'
   });
+  //стейт для пагинации
+  const [currentPage, setCurrentPage] = React.useState(1);
+  
 
   //получение данных с сервера
   React.useEffect(() => {
@@ -30,7 +34,7 @@ export const Home = ({searchValue}) => {
       const search = searchValue  ? `&search = ${searchValue}`: '';
 
 
-    fetch(`https://68b0530d3b8db1ae9c03958f.mockapi.io/item?${category}&sortBy=${sortBy}&order=${order}${search} `)
+    fetch(`https://68b0530d3b8db1ae9c03958f.mockapi.io/item?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search} `)
     .then((obj) =>  obj.json())
     .then((arr) => {
       setItems(arr);
@@ -62,7 +66,7 @@ export const Home = ({searchValue}) => {
 
     window.scrollTo(0, 0);
   
-  }, [categoryId, sortValue, searchValue]);
+  }, [categoryId, sortValue, searchValue, currentPage]);
   
   const pizzas = items.map((obj) =><PizzaBlock key = {obj.id} {...obj} />);
 
@@ -83,6 +87,7 @@ export const Home = ({searchValue}) => {
 
             
           </div>
+      <Pagination onChangePage = {num => setCurrentPage(num)}/>
 
     </div>
   )
