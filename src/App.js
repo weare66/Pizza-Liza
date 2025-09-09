@@ -14,38 +14,34 @@ import { Home } from './pages/Home';
 import { Cart } from './pages/Cart';
 import { NoteFound } from './pages/NoteFound';
 
+export const AppContecst = React.createContext();
+
 
 
 function App() {
 
-
-  
   const [searchValue, setSearchValue] = React.useState('')
-  
-  
-  
-
-  
 
   return (
     <div className="App">
       <div className="wrapper">
 
-      <Header searchValue = {searchValue} setSearchValue = {setSearchValue}/>
+      <AppContecst.Provider value={{searchValue, setSearchValue}}>
+        <Header />
 
-      <div className="content">
-        
-          <Routes>
-            <Route path='/' element={<Home searchValue = {searchValue} setSearchValue = {setSearchValue}/>}/>
-            <Route path='/cart' element={<Cart/>}/>
-            <Route path='*' element={<NoteFound/>}/>
-          </Routes>
-        
-      </div>
-    
-      
+        <div className="content">
+
+            <Routes>
+              <Route path='/' element={<Home/>}/>
+              <Route path='/cart' element={<Cart/>}/>
+              <Route path='*' element={<NoteFound/>}/>
+            </Routes>
+
+        </div>
+      </AppContecst.Provider>
+
     </div>
-    </div>
+  </div>
   );
 }
 

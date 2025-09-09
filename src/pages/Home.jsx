@@ -5,9 +5,11 @@ import { PizzaBlock } from '../components/PizzaBlock';
 import { Skeleton } from '../components/PizzaBlock/Skeleton';
 import axios from 'axios';
 import { Pagination } from '../components/Pagination';
+import { AppContecst } from '../App';
 
 
-export const Home = ({searchValue}) => {
+export const Home = () => {
+  const {searchValue, setSearchValue} = React.useContext(AppContecst);
   
   //пиццы(их хранилище )
   const [items, setItems] = React.useState([]);

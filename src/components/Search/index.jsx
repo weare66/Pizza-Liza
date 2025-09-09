@@ -1,9 +1,12 @@
 
+import React from 'react';
 import styles from './Search.module.scss';
 // import searchSvg from "../assets/img/search.svg";
+import { AppContecst } from '../../App';
 
-export const Search = ({searchValue, setSearchValue}) => {
+export const Search = () => {
 
+  const {searchValue, setSearchValue} = React.useContext(AppContecst);
     
 
   return (
