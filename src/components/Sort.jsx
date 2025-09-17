@@ -1,34 +1,70 @@
 import React from 'react';
+import {useSelector, useDispatch } from 'react-redux';
+import {setSort} from '../redux/slices/filterSlice';
+
+export const sorti = [
+  {name: 'популярности(DESC)', sortProperty: 'rating'},
+  {name: 'популярности(ASC)', sortProperty: '-rating'},
+  {name: 'цене(DESC)', sortProperty: 'price'},
+  {name: 'цене(ASC)', sortProperty: '-price'},
+  {name: 'алфавиту(DESC)', sortProperty: 'title'},
+  {name: 'алфавиту(ASC)', sortProperty: '-title'},
+];
+
  
-export const Sort = ({value, onClickSort2}) => {
+export const Sort = () => {
+
+  const dispatch = useDispatch();
+  const sort = useSelector(state => state.filter.sort)
+
+
+  const sortRef = React.useRef();
+
+
 
   const [activeSort, setActiveSort] = React.useState(false);
 
   
   //const [orengeSort, setOrengeSort] = React.useState(0);
 
-  const sorti = [
-    {name: 'популярности(DESC)', sortProperty: 'rating'},
-    {name: 'популярности(ASC)', sortProperty: '-rating'},
-    {name: 'цене(DESC)', sortProperty: 'price'},
-    {name: 'цене(ASC)', sortProperty: '-price'},
-    {name: 'алфавиту(DESC)', sortProperty: 'title'},
-    {name: 'алфавиту(ASC)', sortProperty: '-title'},
-
-    
-  ];
 
   //const sortName = sorti[value].name;
 
- 
-  const onClickSort = (i) => {
+  const onClickSort = (obj) => {
+
+    dispatch(setSort(obj));
     //setOrengeSort(i);
     setActiveSort(false);
-    onClickSort2(i);
+    //onClickSort2(i);
+    
   };
 
+  React.useEffect(() => {
+
+    const handleClickOutside = (event) => {
+      
+      console.log(event);
+
+      
+
+
+      
+      // if (!event.path.includes(sortRef.current)) {
+      //  setActiveSort(false);
+      // }
+
+    };
+
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside)
+    }
+  },[]);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -43,7 +79,7 @@ export const Sort = ({value, onClickSort2}) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setActiveSort(!activeSort)}>{value.name}</span>
+        <span onClick={() => setActiveSort(!activeSort)}>{sort.name}</span>
       </div>
       {activeSort ? 
       <div  className="sort__popup">
@@ -52,7 +88,7 @@ export const Sort = ({value, onClickSort2}) => {
           <li 
           key={i} 
           onClick={() => onClickSort(obj)} 
-          className={value.sortProperty === obj.sortProperty ? "active" : ''}
+          className={sort.sortProperty === obj.sortProperty ? "active" : ''}
           >{obj.name}</li>)}
         
         </ul>
