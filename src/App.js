@@ -1,7 +1,7 @@
 //import logo from './logo.svg';
 import React from 'react';
 import './scss/app.scss';
-import axios from 'axios';
+//import axios from 'axios';
 
 import { Header } from './components/Header';
 // import { Categories } from './components/Categories';
@@ -14,19 +14,19 @@ import { Home } from './pages/Home';
 import { Cart } from './pages/Cart';
 import { NoteFound } from './pages/NoteFound';
 
-export const AppContecst = React.createContext();
+//export const AppContecst = React.createContext();
 
 
 
 function App() {
 
-  const [searchValue, setSearchValue] = React.useState('')
+  //const [searchValue, setSearchValue] = React.useState('');
 
   return (
     <div className="App">
       <div className="wrapper">
 
-      <AppContecst.Provider value={{searchValue, setSearchValue}}>
+      {/* <AppContecst.Provider value={{searchValue, setSearchValue}}> */}
         <Header />
 
         <div className="content">
@@ -38,7 +38,7 @@ function App() {
             </Routes>
 
         </div>
-      </AppContecst.Provider>
+      {/* </AppContecst.Provider> */}
 
     </div>
   </div>

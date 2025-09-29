@@ -1,24 +1,27 @@
 
 import React from 'react';
 import styles from './Search.module.scss';
-import { AppContecst } from '../../App';
+//import { AppContecst } from '../../App';
 import debounce from 'lodash.debounce' ;
+import { useDispatch } from 'react-redux';
+import { setSearchValue } from '../../redux/slices/filterSlice';
 
 
 
 
 export const Search = () => {
 
-  const [value, setValue] = React.useState('')
+  const [value, setValue] = React.useState('');
+  const dispatch = useDispatch();
 
-  const {searchValue, setSearchValue} = React.useContext(AppContecst);
+  //const {searchValue, setSearchValue} = React.useContext(AppContecst);
   
   const inputRef = React.useRef();
 
 
   const updateSearchValue = React.useCallback( 
     debounce((str) => {
-      setSearchValue(str);
+      dispatch(setSearchValue(str));
   }, 1000),
   [],
 );
@@ -29,7 +32,7 @@ const onChangeInput = (event) => {
 
   
   const onClickClear = () => {
-    setSearchValue('');
+    dispatch(setSearchValue(''));
     setValue('');
     // document.querySelector('input').focus();
     inputRef.current.focus();

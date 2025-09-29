@@ -1,7 +1,7 @@
 import React from 'react';
 import { Skeleton } from './Skeleton';
 import { useDispatch, useSelector } from 'react-redux';
-import {addItem } from '../../redux/slices/cartSlice';
+import {addItem, selectCartItemById } from '../../redux/slices/cartSlice';
 
 export const PizzaBlock = ({
   title,
@@ -14,7 +14,7 @@ export const PizzaBlock = ({
 
     const dispatch = useDispatch();
 
-    const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
+    const cartItem = useSelector(selectCartItemById(id));
 
     const addedCount = cartItem ? cartItem.count : 0;
   //счётчик пицц
