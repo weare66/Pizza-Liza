@@ -13,7 +13,7 @@ import { Pagination } from '../components/Pagination';
 //import axios from 'axios';
 import qs from 'qs';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {selectFilter, setCategoryId, setCurrentPage, setFilters} from '../redux/slices/filterSlice';
@@ -185,7 +185,7 @@ export const Home = () => {
   
 
 
-  const pizzas = items.map((obj) => <PizzaBlock key = {obj.id} {...obj} />);
+  const pizzas = items.map((obj) => <Link key = {obj.id} to={`/pizza/${obj.id}`}><PizzaBlock  {...obj} /></Link>);
 
  
   const skeleton = [...new Array(4)].map((_, index) => <Skeleton key={index}/>);
