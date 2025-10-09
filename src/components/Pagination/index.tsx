@@ -5,7 +5,7 @@ import { type } from 'os';
 
 
 type PaginationProps = {
-  onChangePage: any;
+  onChangePage: (page: number) => void;
   currentPage: number;
 };
 

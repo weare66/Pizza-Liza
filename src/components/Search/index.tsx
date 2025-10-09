@@ -25,13 +25,15 @@ export const Search = () => {
   }, 1000),
   [],
 );
-const onChangeInput = (event: any) => {
+const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
 };
 
+
   
   const onClickClear = () => {
+
     dispatch(setSearchValue(''));
     setValue('');
     // document.querySelector('input').focus();
