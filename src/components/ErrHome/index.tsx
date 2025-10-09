@@ -3,7 +3,7 @@ import styles from './ErrHome.module.scss';
 
 
 
-export const ErrHome = () => {
+export const ErrHome: React.FC = () => {
   return (
     <div className={styles.root} >
         <div><img width={250} height={250} src='/img/errHome.png' alt="Error Home" /></div>

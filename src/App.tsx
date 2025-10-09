@@ -1,9 +1,9 @@
 //import logo from './logo.svg';
-import React from 'react';
+//import React from 'react';
 import './scss/app.scss';
 //import axios from 'axios';
 
-import { Header } from './components/Header';
+//import { Header } from './components/Header';
 // import { Categories } from './components/Categories';
 // import { Sort } from './components/Sort';
 // import { PizzaBlock } from './components/PizzaBlock';

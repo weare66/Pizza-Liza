@@ -3,13 +3,17 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-export const FullPizza = () => {
+export const FullPizza: React.FC = () => {
 
     const {id} = useParams();
 
     const navigate = useNavigate()
 
-    const [isPizza, setPizza] = React.useState();
+    const [isPizza, setPizza] = React.useState<{
+      imageUrl: string;
+      title: string;
+      price: number;
+    }>();
 
     React.useEffect(() => {
       async function fetchPizza() {
@@ -26,9 +30,10 @@ export const FullPizza = () => {
     }, []);
 
     if (!isPizza) {
-        return 'Loading...';
+        return <>'Loading...'</>;
     }
 
+    
   return (
     <div className='container'>
       <img src={isPizza.imageUrl} alt="Pizza" />
@@ -36,5 +41,5 @@ export const FullPizza = () => {
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque ut dolor, hic assumenda similique magni totam libero laboriosam eos sunt, ipsum consequuntur reprehenderit dolores voluptatibus inventore, quod dicta ratione nam.</p>
       <h4>{isPizza.price} ₽</h4>
     </div>
-  )
-}
+  );
+};

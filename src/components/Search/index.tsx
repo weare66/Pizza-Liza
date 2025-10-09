@@ -16,16 +16,16 @@ export const Search = () => {
 
   //const {searchValue, setSearchValue} = React.useContext(AppContecst);
   
-  const inputRef = React.useRef();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
 
   const updateSearchValue = React.useCallback( 
-    debounce((str) => {
+    debounce((str: string) => {
       dispatch(setSearchValue(str));
   }, 1000),
   [],
 );
-const onChangeInput = (event) => {
+const onChangeInput = (event: any) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
 };
@@ -35,7 +35,11 @@ const onChangeInput = (event) => {
     dispatch(setSearchValue(''));
     setValue('');
     // document.querySelector('input').focus();
-    inputRef.current.focus();
+    // if (inputRef.current) {
+    //   inputRef.current.focus();
+    // }
+
+    inputRef.current?.focus();
   }
 
   

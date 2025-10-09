@@ -3,7 +3,7 @@ import styles from './NoteFoundBlock.module.scss';
 
 
 
-export const NoteFoundBlock = () => {
+export const NoteFoundBlock: React.FC = () => {
   return (
     <div className={styles.root} >
         <div><img width={250} height={250} src='/img/noteFound.png' alt="efewfw" /></div>

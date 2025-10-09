@@ -2,7 +2,17 @@ import React from 'react';
 import {useSelector, useDispatch } from 'react-redux';
 import {selectSort, setSort} from '../redux/slices/filterSlice';
 
-export const sorti = [
+// const ObjectInformation = {
+//   age: 15,
+//   city: 'Moscow'
+// }
+
+type SortItem = {
+  name: string;
+  sortProperty: string;
+};
+
+export const sorti: SortItem[] = [
   {name: 'популярности(DESC)', sortProperty: 'rating'},
   {name: 'популярности(ASC)', sortProperty: '-rating'},
   {name: 'цене(DESC)', sortProperty: 'price'},
@@ -18,7 +28,7 @@ export const Sort = () => {
   const sort = useSelector(selectSort);
 
 
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
 
 
@@ -30,7 +40,7 @@ export const Sort = () => {
 
   //const sortName = sorti[value].name;
 
-  const onClickSort = (obj) => {
+  const onClickSort = (obj: SortItem) => {
 
     dispatch(setSort(obj));
     //setOrengeSort(i);
@@ -41,7 +51,7 @@ export const Sort = () => {
 
   React.useEffect(() => {
 
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: any) => {
       
       console.log(event);
 

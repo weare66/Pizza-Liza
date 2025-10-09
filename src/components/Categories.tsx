@@ -1,6 +1,11 @@
-import React from 'react'
+import React from 'react';
+
+type CategoriesProps  = {
+  value: number;
+  onClickCategory: any;
+};
  
-export const Categories = ({value, onClickCategory}) => {
+export const Categories: React.FC<CategoriesProps> = ({value, onClickCategory}) => {
   
   //const [activeIndex, setActiveIndex] = React.useState(0); 
   

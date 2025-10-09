@@ -22,7 +22,7 @@ import {fetchPizzas, selectPizzaData} from '../redux/slices/pizzaSlice';
 
 
 
-export const Home = () => {
+export const Home: React.FC = () => {
 
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
@@ -35,8 +35,8 @@ export const Home = () => {
   const {categoryId, sort, currentPage, searchValue} = useSelector(selectFilter)
   const sortValue = sort.sortProperty;
 
-  const onChangePage = (num) => {
-    dispatch(setCurrentPage(num))
+  const onChangePage = (page: number) => {
+    dispatch(setCurrentPage(page))
   };
  
 
@@ -92,6 +92,7 @@ export const Home = () => {
 
 
     dispatch(
+      //@ts-ignore
         fetchPizzas({
           sortBy,
           order,
@@ -185,7 +186,7 @@ export const Home = () => {
   
 
 
-  const pizzas = items.map((obj) => <Link key = {obj.id} to={`/pizza/${obj.id}`}><PizzaBlock  {...obj} /></Link>);
+  const pizzas = items.map((obj: any) => <Link key = {obj.id} to={`/pizza/${obj.id}`}><PizzaBlock  {...obj} /></Link>);
 
  
   const skeleton = [...new Array(4)].map((_, index) => <Skeleton key={index}/>);
@@ -193,7 +194,7 @@ export const Home = () => {
     return (
     <div className="container">
     <div className="content__top">
-            <Categories value = {categoryId} onClickCategory = {(id)=>dispatch(setCategoryId(id))}/>
+            <Categories value = {categoryId} onClickCategory = {(idx: number)=>dispatch(setCategoryId(idx))}/>
             <Sort/>
           </div>
           {status === 'error' ? 
