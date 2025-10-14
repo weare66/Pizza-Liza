@@ -1,10 +1,56 @@
 import axios from "axios";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
+import { CartItemsType } from "./cartSlice";
+import { Sort } from "./filterSlice";
+
+export type FetchPizzasProps = {
+  sortBy: string;
+  order: string;
+  category: string;
+  search: string;
+  currentPage: string;
+};
+
+
+
+ //type FetchPizzasProps = Record<string, string>
+
+
+
+type Pizza = {
+  title: string;
+  price: number;
+  imageUrl: string;
+  id: string;
+  sizes: number[];
+  types: number[];
+  rating: number;
+};
+
+export enum Status {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
+
+interface PizzaSilceState {
+  items: Pizza[];
+  status: Status;
+}
+
+
+const initialState: PizzaSilceState = {
+  items: [],
+  status : Status.LOADING, // loading | success | error
+};
+
+
 
 
 export const fetchPizzas = createAsyncThunk(
   'pizza/fetchPizzasStatus',
-  async (params, thunkAPI) => {
+  async (params: FetchPizzasProps, thunkAPI) => {
     const {
           sortBy,
           order,
@@ -15,22 +61,17 @@ export const fetchPizzas = createAsyncThunk(
 
         //console.log(thunkAPI);
 
-    const {data} = await axios.get(`https://68b0530d3b8db1ae9c03958f.mockapi.io/item?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search} `);
-    return data;
+    const {data} = await axios.get<Pizza[]>(`https://68b0530d3b8db1ae9c03958f.mockapi.io/item?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search} `);
+    return data as Pizza[];
   }
 );
 
-
-const initialState = {
-  items: [],
-  status : 'loading', // loading | success | error
-};
 
 const pizzaSlice = createSlice({
     name: 'pizza',
     initialState,
     reducers: {
-      setItems(state, action) {
+      setItems(state, action: PayloadAction<Pizza[]>) {
         state.items = action.payload;
       }, 
     },
@@ -49,17 +90,17 @@ const pizzaSlice = createSlice({
     extraReducers: (builder) => {
       builder.addCase(fetchPizzas.pending, (state) => {
        // console.log('Идёт отправка');
-        state.status = 'loading';
+        state.status = Status.LOADING;
         state.items = [];
 
       });
       builder.addCase(fetchPizzas.fulfilled, (state, action) => {
         state.items = action.payload;
-        state.status = 'success';
+        state.status = Status.SUCCESS;
 
       });
       builder.addCase(fetchPizzas.rejected, (state, action) => {
-        state.status = 'error';
+        state.status = Status.ERROR;
         state.items = [];
         
       });
@@ -68,7 +109,7 @@ const pizzaSlice = createSlice({
     },
 });
 
-export const selectPizzaData = (state) => state.pizza;
+export const selectPizzaData = (state: RootState) => state.pizza;
 
 export const {setItems} = pizzaSlice.actions;
 

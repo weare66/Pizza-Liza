@@ -9,7 +9,7 @@ import { setSearchValue } from '../../redux/slices/filterSlice';
 
 
 
-export const Search = () => {
+export const Search: React.FC = () => {
 
   const [value, setValue] = React.useState('');
   const dispatch = useDispatch();
