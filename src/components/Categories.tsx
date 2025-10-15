@@ -1,11 +1,14 @@
 import React from 'react';
+import  useWhyDidYouUpdate  from 'ahooks/lib/useWhyDidYouUpdate';
+
 
 type CategoriesProps  = {
   value: number;
   onClickCategory: (idx: number) => void;
 };
  
-export const Categories: React.FC<CategoriesProps> = ({value, onClickCategory}) => {
+export const Categories: React.FC<CategoriesProps> = React.memo(
+  ({value, onClickCategory}) => {
   
   //const [activeIndex, setActiveIndex] = React.useState(0); 
   
@@ -15,6 +18,9 @@ export const Categories: React.FC<CategoriesProps> = ({value, onClickCategory}) 
   //  setActiveIndex(index);
   // };
   
+  //useWhyDidYouUpdate('Categories', {value, onClickCategory});
+
+
   return (
     <div className="categories">
       <ul>
@@ -24,5 +30,5 @@ export const Categories: React.FC<CategoriesProps> = ({value, onClickCategory}) 
       </ul>
     </div>
   );
-};
-
+}
+); 

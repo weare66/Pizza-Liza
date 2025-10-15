@@ -60,7 +60,7 @@ const cartSlice = createSlice({
       if (findItem) {
         findItem.count--;
       }
-      state.items = state.items.filter((obj) => obj.count !== 0);
+      //state.items = state.items.filter((obj) => obj.count !== 0);
     },
 
      

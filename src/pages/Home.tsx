@@ -199,7 +199,11 @@ export const Home: React.FC = () => {
 
 
 
-
+  //т.е перерисовывается при первом рендере(для оптимизации)
+  const onClickCategory = React.useCallback((idx: number) => {
+    dispatch(setCategoryId(idx))
+  }, []); 
+ 
   
 
 
@@ -208,10 +212,12 @@ export const Home: React.FC = () => {
  
   const skeleton = [...new Array(4)].map((_, index) => <Skeleton key={index}/>);
 
+
+
     return (
     <div className="container">
     <div className="content__top">
-            <Categories value = {categoryId} onClickCategory = {(idx: number)=>dispatch(setCategoryId(idx))}/>
+            <Categories value = {categoryId} onClickCategory = {onClickCategory}/>
             <SortPopup/>
           </div>
           {status === 'error' ? 

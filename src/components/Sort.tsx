@@ -27,7 +27,7 @@ export const sorti: SortItem[] = [
 ];
 
  
-export const SortPopup = () => {
+export const SortPopup = React.memo(() => {
 
   const dispatch = useAppDispatch();
   const sort = useSelector(selectSort);
@@ -84,6 +84,9 @@ export const SortPopup = () => {
     }
   },[]);
 
+
+  
+
   return (
     <div ref={sortRef} className="sort">
       <div className="sort__label">
@@ -120,4 +123,4 @@ export const SortPopup = () => {
       
     </div>
   );
-};
+}); 
